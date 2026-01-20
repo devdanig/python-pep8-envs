@@ -37,55 +37,31 @@ sample_articles = [
     },
 ]
 
+# Comprehensions nos permite convertir un ciclo for de varias niveles en una sola linea de codigo
+# Extrae titulos usando FOR
 
-def extract_titles_traditional(articles):
-    """Extrae solo los titulos usando un for"""
+def extract_titles_for(articles):
     titles = []
     for article in articles:
-        if len(article['title']) > 15:
-            titles.append(article['title'])
+        titles.append(article['title'])
     return titles
 
+# Extraer titulos con Comprehensions
+
 def extract_titles(articles):
-    """Extrae los titulos usando comprehension"""
-    return [
-        article['title'] for article in articles if len(article['title']) > 10
-    ]
+    '''[Expression for elemento in iterable]'''
+    return [article['title'] for article in articles]
 
 
-"""Reto devolver un diccionario de titulos y categoria"""
+# Extraer titulo y descripcion con Comprehensions
 
-def extract_titles_diccionary(article_list):
-    titles_category = {}
-    for article in article_list:
-        titles_category[article['title']] = article['category']
-    return titles_category
+def extract_title_and_description(articles):
+    return { article['title'] : article['description'] for article in articles}
+    
 
-
-def extract_titles_diccionary_comprehension(article_list):
-    return {
-        article['title'] : article['category'] for article in article_list
-    }
+# Reto: Agregar if en cada funcion, crear una lista sin que se repitan de todas las fuentes con set() primero for y luengo comprehensions.
 
 
-def extract_titles_set(article_list):
-    categories = set()
-    for article in article_list:
-        categories.add(article['category'])
-    return categories
-
-def extract_titles_set_comprehension(article_list):
-    return { article['category'] for article in article_list }
-
-
-print(extract_titles_traditional(sample_articles))
-print("------------------------------------------")
-print(extract_titles(sample_articles))
-print("------------------------------------------")
-print(extract_titles_diccionary(sample_articles))
-print("------------------------------------------")
-print(extract_titles_diccionary_comprehension(sample_articles))
-print("------------------------------------------")
-print(extract_titles_set(sample_articles))
-print("------------------------------------------")
-print(extract_titles_set_comprehension(sample_articles))
+print(f'Con For titles: {extract_titles_for(sample_articles)}') 
+print(f'Con Comprehension titles: {extract_titles(sample_articles)}') 
+print(f'Titulo y descripcion con Comprenhesions: {extract_title_and_description(sample_articles)}')
