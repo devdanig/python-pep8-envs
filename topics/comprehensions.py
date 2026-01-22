@@ -61,7 +61,22 @@ def extract_title_and_description(articles):
 
 # Reto: Agregar if en cada funcion, crear una lista sin que se repitan de todas las fuentes con set() primero for y luengo comprehensions.
 
+def extract_source_for(articles):
+    source = set()
+    for article in articles:
+        if article.get('source') and article.get('source').get('name'):
+            source.add(article.get('source').get('name'))
+    return source
+
+def extract_sources(articles):
+    return {
+        article.get('source').get('name')
+        for article in articles
+        if article.get('source') and article.get('source').get('name')
+    }
 
 print(f'Con For titles: {extract_titles_for(sample_articles)}') 
 print(f'Con Comprehension titles: {extract_titles(sample_articles)}') 
 print(f'Titulo y descripcion con Comprenhesions: {extract_title_and_description(sample_articles)}')
+print(f'Fuentes con for: {extract_source_for(sample_articles)}')
+print(f'Fuente con comprehensions: {extract_sources(sample_articles)}')
